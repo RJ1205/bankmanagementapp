@@ -1,2 +1,2 @@
 # bankmanagementapp
-simple bank management app
+simple bank management app (currently work in progress)
