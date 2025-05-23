@@ -14,6 +14,20 @@ public class Main {
             switch (input) {
                 case "1":
                     printImportMenu(scanner);
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+                case "5":
+                    break;
+                case "6":
+                    break;
+                case "7":
+                    running = false;
+                    break;
 
                 default:
                     System.out.println("Invalid option. Please try again.");
