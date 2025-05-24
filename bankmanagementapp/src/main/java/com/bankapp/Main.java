@@ -11,19 +11,25 @@ public class Main {
         while (running) {
             printMainMenu();
             String input = scanner.nextLine();
+            clearConsole();
             switch (input) {
                 case "1":
                     printImportMenu(scanner);
                     break;
                 case "2":
+                    printReportingMenu(scanner);
                     break;
                 case "3":
+                    printCreateAccMenu(scanner);
                     break;
                 case "4":
+                    printDepositMenu(scanner);
                     break;
                 case "5":
+                    printWithdrawalMenu(scanner);
                     break;
                 case "6":
+                    printShowBalanceMenu(scanner);
                     break;
                 case "7":
                     running = false;
@@ -56,6 +62,22 @@ public class Main {
 
     }   
     
+    private static void printCreateAccMenu(Scanner scanner) {
+
+    }
+    
+    private static void printDepositMenu(Scanner scanner) {
+
+    }
+
+    private static void printWithdrawalMenu(Scanner scanner) {
+
+    }
+
+    private static void printShowBalanceMenu(Scanner scanner) {
+        
+    }
+
     private static void clearConsole(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
