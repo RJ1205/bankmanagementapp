@@ -37,6 +37,7 @@ public class Main {
 
                 default:
                     System.out.println("Invalid option. Please try again.");
+                    
             }
         }
     }
@@ -58,12 +59,27 @@ public class Main {
     }
 
     private  static void printReportingMenu(Scanner scanner) {
-    
+        System.out.println("1. Show all customers");
+        System.out.println("2. Show account balance of a customer");
+        System.out.println("3. Show all transactions of a customer");
+        System.out.println("4. Back to main menu");
+        System.out.print("Enter your choice: ");
+        String choice = scanner.nextLine();
+        clearConsole();
+        switch (choice) {
+            default:
+                System.out.println("Enter a valid choice");
+        }
 
     }   
     
     private static void printCreateAccMenu(Scanner scanner) {
-
+        System.out.println("Please enter your name:");
+        String name = scanner.nextLine();
+        clearConsole();
+        System.out.println("Please enter your address:");
+        String address = scanner.nextLine();
+        clearConsole();
     }
     
     private static void printDepositMenu(Scanner scanner) {
