@@ -1,1 +1,8 @@
+com/bankapp/Customer.class
+com/bankapp/ReportGenerator.class
+com/bankapp/MenuHandler.class
+com/bankapp/FileImporter.class
+com/bankapp/Transaction.class
 com/bankapp/Main.class
+com/bankapp/BankAccount.class
+com/bankapp/Bank.class
