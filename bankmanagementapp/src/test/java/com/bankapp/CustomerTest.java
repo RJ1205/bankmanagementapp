@@ -14,6 +14,8 @@ public class CustomerTest {
         customer = new Customer(1, "Max Mustermann", "Musterstraße 123");
     }
 
+    
+
     @Test
     void testConstructorAndGetters() {
         assertEquals(1, customer.getId());
