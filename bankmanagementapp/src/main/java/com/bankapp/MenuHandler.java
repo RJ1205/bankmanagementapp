@@ -35,7 +35,10 @@ public class MenuHandler {
                 case "6":
                     printShowBalanceMenu();
                     break;
-                case "7":
+                case: "7":
+                    printSearchMenu(scanner);
+                    break;
+                case "8":
                     running = false;
                     System.out.println("Exiting App! Goodbye!");
                     break;
@@ -53,7 +56,8 @@ public class MenuHandler {
         System.out.println("4. Deposit");
         System.out.println("5. Withdrawal");
         System.out.println("6. Show balance");
-        System.out.println("7. Exit App");
+        System.out.println("7. Search");
+        System.out.println("8. Exit App");
         System.out.print("Enter your choice: ");
     }
 
@@ -141,6 +145,49 @@ public class MenuHandler {
         clearConsole();
         System.out.println("Current balance for account " + accountNumber + ": ...");
     }
+
+    private void printSearchMenu(Scanner scanner) {
+    System.out.println("Search Menu");
+    System.out.println("1. Search customer by name");
+    System.out.println("2. Search customer by ID");
+    System.out.println("3. Search account by account number");
+    System.out.println("4. Search transaction by transaction ID");
+    System.out.println("5. Back to main menu");
+    System.out.print("Enter your choice: ");
+    String choice = scanner.nextLine();
+    clearConsole();
+
+    switch (choice) {
+        case "1":
+            System.out.print("Enter the customer name: ");
+            String name = scanner.nextLine();
+            clearConsole();
+            System.out.println("Searching for customer with name: " + name + "...");
+            break;
+        case "2":
+            System.out.print("Enter the customer ID: ");
+            String id = scanner.nextLine();
+            clearConsole();
+            System.out.println("Searching for customer with ID: " + id + "...");
+            break;
+        case "3":
+            System.out.print("Enter the account number: ");
+            String accNumber = scanner.nextLine();
+            clearConsole();
+            System.out.println("Searching for account with number: " + accNumber + "...");
+            break;
+        case "4":
+            System.out.print("Enter the transaction ID: ");
+            String txId = scanner.nextLine();
+            clearConsole();
+            System.out.println("Searching for transaction with ID: " + txId + "...");
+            break;
+        case "5":
+            return;
+        default:
+            System.out.println("Invalid choice. Returning to main menu.");
+    }
+}
 
     private void clearConsole() {
         System.out.print("\033[H\033[2J");
