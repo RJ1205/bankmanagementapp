@@ -1,46 +1,56 @@
-# === Java ===
+# === Maven Build Artifacts ===
+target/
 *.class
 *.jar
 *.war
 *.ear
 
-# === Maven ===
-/target/
-!.mvn/wrapper/maven-wrapper.jar
-.mvn/timing.properties
-
-# === JaCoCo ===
-jacoco.exec
-/jacoco-report/
-/target/site/jacoco/
-/target/jacoco.exec
-
-# === Logs ===
-*.log
-
-# === IDEs ===
-
-## IntelliJ IDEA
+# === IntelliJ IDEA ===
 .idea/
 *.iml
 *.iws
 out/
 
-## Eclipse
+# === Eclipse ===
 .classpath
 .project
 .settings/
 bin/
 
-## VS Code
+# === VS Code ===
 .vscode/
 
-# === OS-generated files ===
+# === JaCoCo ===
+jacoco.exec
+target/site/jacoco/
+
+# === Test Reports ===
+target/surefire-reports/
+target/test-classes/
+target/generated-test-sources/
+
+# === System Files ===
 .DS_Store
 Thumbs.db
 
-# === Test Reports ===
-/surefire-reports/
-/target/surefire-reports/
-/target/test-classes/
-/target/generated-test-sources/
+# === Backup & Temp Files ===
+*.log
+*.tmp
+*.bak
+*.swp
+*.ist
+*.lst
+
+# === Ignore all HTML, XML, CSV, etc. generated files ===
+*.html
+*.xml
+*.csv
+*.json
+*.svg
+
+# === Ignore everything that is not source or essential config ===
+# (But not pom.xml or .gitignore itself)
+!src/**
+!pom.xml
+!.gitignore
+!.mvn/
