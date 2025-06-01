@@ -7,7 +7,7 @@ public class Customer {
     private int id;
     private String name;
     private String address;
-    private List<BankAccount> accounts = new ArrayList<>();    
+    private List<BankAccount> accounts = new ArrayList<>();
 
     public Customer(int id, String name, String address) {
         this.id = id;
@@ -46,6 +46,5 @@ public class Customer {
     public void setAccounts(List<BankAccount> accounts) {
         this.accounts = accounts;
     }
-    
 
 }

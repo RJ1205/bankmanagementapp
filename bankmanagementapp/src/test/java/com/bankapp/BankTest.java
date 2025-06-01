@@ -2,6 +2,8 @@ package com.bankapp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class BankTest {
@@ -18,4 +20,29 @@ public class BankTest {
         assertEquals(1, customer.getId(), "First customer should have ID 1");
         assertEquals(2, customer2.getId(), "Second customer should have ID 2");
     }
+
+    @Test
+    public void testCreateAccountForExistingCustomer() {
+        Bank bank = new Bank();
+
+        Customer customer = bank.createCustomer("Max Mustermann", "Musterstraße 1");
+        int customerId = customer.getId();
+        BankAccount account = bank.createAccount(customerId);
+        assertNotNull(account, "Account should not be null");
+        assertEquals(customerId, account.getCustomerId(), "Customer ID should match");
+        assertTrue(bank.getAccounts().containsKey(account.getId()), "Account should be in the accounts map");
+        assertTrue(customer.getAccounts().contains(account), "Customer should have the account in their list");
+    }
+
+    @Test
+    public void testCreateAccountForNonexistentCustomerThrowsException() {
+        Bank bank = new Bank();
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            bank.createAccount(999);
+        });
+
+        assertEquals("Customer with ID 999 does not exist.", exception.getMessage());
+    }
+
 }
