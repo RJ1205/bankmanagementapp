@@ -24,7 +24,7 @@ public class BankAccount {
     }
 
     public double getBalance() {
-<span class="nc" id="L27">        return balance;</span>
+<span class="fc" id="L27">        return balance;</span>
     }
 
     public List&lt;Transaction&gt; getTransactions() {
@@ -32,20 +32,20 @@ public class BankAccount {
     }
 
     public void deposit(double amount) {
-<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (amount &lt;= 0)</span>
-<span class="nc" id="L36">            throw new IllegalArgumentException(&quot;Deposit amount must be positive.&quot;);</span>
-<span class="nc" id="L37">        balance += amount;</span>
-<span class="nc" id="L38">        transactions.add(new Transaction(&quot;deposit&quot;, amount));</span>
-<span class="nc" id="L39">    }</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (amount &lt;= 0)</span>
+<span class="fc" id="L36">            throw new IllegalArgumentException(&quot;Deposit amount must be positive.&quot;);</span>
+<span class="fc" id="L37">        balance += amount;</span>
+<span class="fc" id="L38">        transactions.add(new Transaction(&quot;deposit&quot;, amount));</span>
+<span class="fc" id="L39">    }</span>
 
     public void withdraw(double amount) {
-<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (amount &lt;= 0)</span>
-<span class="nc" id="L43">            throw new IllegalArgumentException(&quot;Withdrawal amount must be positive.&quot;);</span>
-<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (amount &gt; balance)</span>
-<span class="nc" id="L45">            throw new IllegalArgumentException(&quot;Insufficient funds.&quot;);</span>
-<span class="nc" id="L46">        balance -= amount;</span>
-<span class="nc" id="L47">        transactions.add(new Transaction(&quot;withdrawal&quot;, amount));</span>
-<span class="nc" id="L48">    }</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (amount &lt;= 0)</span>
+<span class="fc" id="L43">            throw new IllegalArgumentException(&quot;Withdrawal amount must be positive.&quot;);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (amount &gt; balance)</span>
+<span class="fc" id="L45">            throw new IllegalArgumentException(&quot;Insufficient funds.&quot;);</span>
+<span class="fc" id="L46">        balance -= amount;</span>
+<span class="fc" id="L47">        transactions.add(new Transaction(&quot;withdrawal&quot;, amount));</span>
+<span class="fc" id="L48">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

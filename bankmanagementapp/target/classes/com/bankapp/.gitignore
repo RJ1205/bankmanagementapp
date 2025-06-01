@@ -1,0 +1,37 @@
+# === Java ===
+*.class
+*.jar
+*.war
+*.ear
+
+# === Maven ===
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/timing.properties
+
+# === Logs ===
+*.log
+
+# === IDEs ===
+
+## IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+## Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+## VS Code
+.vscode/
+
+# === OS-generated files ===
+.DS_Store
+Thumbs.db
+
+# === Test Reports ===
+/surefire-reports/
