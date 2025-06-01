@@ -35,7 +35,7 @@ public class MenuHandler {
                 case "6":
                     printShowBalanceMenu();
                     break;
-                case: "7":
+                case "7":
                     printSearchMenu(scanner);
                     break;
                 case "8":
