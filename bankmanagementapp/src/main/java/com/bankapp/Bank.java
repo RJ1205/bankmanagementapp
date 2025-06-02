@@ -2,6 +2,8 @@ package com.bankapp;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+
 
 public class Bank {
     private Map<Integer, Customer> customers = new HashMap();
@@ -33,5 +35,12 @@ public class Bank {
 
         return account;
     }
+    
+    public List<Customer> importCustomers(String filePath){
+        // Muss noch implementiert werden 
+    }
 
+    public List<BankAccount> importAccounts(String filePath){
+        // Muss noch implementiert werden
+    }
 }
