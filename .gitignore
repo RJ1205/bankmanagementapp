@@ -44,7 +44,7 @@ Thumbs.db
 # === Ignore all HTML, XML, CSV, etc. generated files ===
 *.html
 *.xml
-*.csv
+
 *.json
 *.svg
 
