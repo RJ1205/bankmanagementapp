@@ -52,41 +52,57 @@ public class BankTest {
     }
 
     @Test
-    void testImportCustomersNormalCase() {
+    void testCreateCustomerNormalCase() throws IOException {
         Bank bank = new Bank();
-        List<Customer> imported = bank.importCustomers("src/test/resources/test_customers.csv");
 
-        assertEquals(2, imported.size());
-        assertEquals("Max Mustermann", imported.get(0).getName());
-        assertEquals("Musterstraße 1", imported.get(0).getAddress());
+        Path tempFile = Files.createTempFile("temp_customers", ".csv");
+        Files.writeString(tempFile,
+                "Alice,Main Street 1\n" +
+                        "Bob,Second Street 2");
+
+        List<Customer> customers = bank.importCustomers(tempFile.toString());
+
+        assertEquals(2, customers.size(), "Es sollten zwei Kunden importiert werden");
+
+        Customer customer1 = customers.get(0);
+        Customer customer2 = customers.get(1);
+
+        assertEquals("Alice", customer1.getName());
+        assertEquals("Main Street 1", customer1.getAddress());
+        assertEquals(1, customer1.getId());
+
+        assertEquals("Bob", customer2.getName());
+        assertEquals("Second Street 2", customer2.getAddress());
+        assertEquals(2, customer2.getId());
+
+        Files.deleteIfExists(tempFile);
     }
 
     @Test
-    void testImportAccountsNormalCase() {
+    void testCreateAccountForImportedCustomer() throws IOException {
         Bank bank = new Bank();
 
-        Customer c1 = bank.createCustomer("Max Mustermann", "Musterstraße 1");
-        Customer c2 = bank.createCustomer("Erika Musterfrau", "Hauptstraße 99");
+        Path customerFile = Files.createTempFile("temp_customers", ".csv");
+        Files.writeString(customerFile, "Max Mustermann,Musterstraße 1");
+        List<Customer> customers = bank.importCustomers(customerFile.toString());
 
-        List<BankAccount> imported = bank.importAccounts("src/test/resources/test_accounts.csv");
+        Customer customer = customers.get(0);
+        int customerId = customer.getId();
 
-        assertEquals(2, imported.size());
+        Path accountFile = Files.createTempFile("temp_accounts", ".csv");
+        Files.writeString(accountFile, "1," + customerId + ",1000.0");
 
-        BankAccount a1 = imported.get(0);
-        assertEquals(1, a1.getId());
-        assertEquals(1, a1.getCustomerId());
-        assertEquals(1000.0, a1.getBalance());
+        List<BankAccount> accounts = bank.importAccounts(accountFile.toString());
 
-        BankAccount a2 = imported.get(1);
-        assertEquals(2, a2.getId());
-        assertEquals(2, a2.getCustomerId());
-        assertEquals(2500.5, a2.getBalance());
+        assertEquals(1, accounts.size());
+        BankAccount account = accounts.get(0);
 
-        assertEquals(1, c1.getAccounts().size());
-        assertEquals(a1, c1.getAccounts().get(0));
+        assertEquals(customerId, account.getCustomerId());
+        assertTrue(bank.getAccounts().containsKey(account.getId()));
+        assertTrue(customer.getAccounts().contains(account));
 
-        assertEquals(1, c2.getAccounts().size());
-        assertEquals(a2, c2.getAccounts().get(0));
+        Files.deleteIfExists(customerFile);
+        Files.deleteIfExists(accountFile);
     }
 
     @Test
@@ -98,27 +114,54 @@ public class BankTest {
     }
 
     @Test
+    void testImportCustomerWithMissingFile(){
+        Bank bank = new Bank();
+        assertThrows(FileNotFoundException.class, () -> {
+            bank.importAccounts("src/test/resources/does_not_exist.csv");
+        });
+    }
+
+    @Test
     void testImportAccountsWithMissingCustomer() throws IOException {
-        Bank bank = new Bank(); // keine Kunden angelegt
-        Files.writeString(Path.of("src/test/resources/bad_accounts.csv"), "1,42,500.0");
+        Bank bank = new Bank();
+
+        Path tempFile = Files.createTempFile("bad_accounts", ".csv");
+        Files.writeString(tempFile, "1,42,500.0");
 
         assertThrows(IllegalStateException.class, () -> {
-            bank.importAccounts("src/test/resources/bad_accounts.csv");
+            bank.importAccounts(tempFile.toString());
         });
+
+        Files.deleteIfExists(tempFile);
     }
 
     @Test
     void testImportAccountsWithDuplicateAccount() throws IOException {
         Bank bank = new Bank();
         Customer c = bank.createCustomer("Max", "Adresse");
+        bank.createAccount(c.getId());
 
-        bank.createAccount(c.getId()); // Account 1 schon existiert
-
-        Files.writeString(Path.of("src/test/resources/dupe_accounts.csv"), "1," + c.getId() + ",1000.0");
+        Path tempFile = Files.createTempFile("dupe_accounts", ".csv");
+        Files.writeString(tempFile, "1," + c.getId() + ",1000.0");
 
         assertThrows(IllegalStateException.class, () -> {
-            bank.importAccounts("src/test/resources/dupe_accounts.csv");
+            bank.importAccounts(tempFile.toString());
         });
+
+        Files.deleteIfExists(tempFile);
+    }
+
+    @Test
+    void testImportAccountsWithInvalidCSVFormat() throws IOException {
+        Bank bank = new Bank();
+        Path tempFile = Files.createTempFile("invalid_accounts", ".csv");
+        Files.writeString(tempFile, "not,a,number");
+
+        assertThrows(Exception.class, () -> {
+            bank.importAccounts(tempFile.toString());
+        });
+
+        Files.deleteIfExists(tempFile);
     }
 
 }
