@@ -19,11 +19,22 @@ public class Bank {
         return accounts;
     }
 
+    /**
+     * Creates a new customer and adds them to the customers map.
+     * @param name name of the customer
+     * @param address address of the customer
+     */
+
     public Customer createCustomer(String name, String address) {
         Customer customer = new Customer(customerId++, name, address);
         customers.put(customer.getId(), customer);
         return customer;
     }
+    /**
+     * Creates a new banking account with no money on it for the given customer id
+     * @param customerId id of the customer
+     * @throws IllegalArgumentExceptions when the customer id is not valid
+     */
 
     public BankAccount createAccount(int customerId) {
         Customer customer = customers.get(customerId);
@@ -39,6 +50,12 @@ public class Bank {
 
         return account;
     }
+
+    /**
+     * imports customers from a given csv file 
+     * @param filePath path to the file to be imported
+     * @throws FileNotFoundException if the file does not exist
+     */
 
     public List<Customer> importCustomers(String filePath) throws FileNotFoundException {
 
@@ -56,6 +73,13 @@ public class Bank {
 
         return addedCustomers;
     }
+
+    /**
+     * imports bank accounts from the given csv file
+     * @param filepath path of the file to be imported
+     * @throws FileNotFoundException when the file does not exist
+     * @throws IllegalArgumentException when either the account already exists or when the customer does not exist
+     */
 
     public List<BankAccount> importAccounts(String filepath) throws IOException {
         if (!Files.exists(Paths.get(filepath))) {

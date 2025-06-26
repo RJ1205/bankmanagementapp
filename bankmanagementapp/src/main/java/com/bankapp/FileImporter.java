@@ -6,9 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+/**
+ * This class is for handling imports like customers, accounts, etc.
+ */
 
 public class FileImporter {
-
+    
     public static List<Customer> importCustomersFromCSV(String filepath) {
         List<Customer> customers = new ArrayList<>();
 

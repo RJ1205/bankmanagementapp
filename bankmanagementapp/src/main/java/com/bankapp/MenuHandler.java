@@ -8,7 +8,9 @@ public class MenuHandler {
     public MenuHandler(Scanner scanner) {
         this.scanner = scanner;
     }
-
+    /**
+     * Run method to start the entire bank application.
+     */
     public void run() {
         boolean running = true;
 
@@ -47,7 +49,7 @@ public class MenuHandler {
             }
         }
     }
-
+    // all methods below are for printing menus and handling user input
     private void printMainMenu() {
         System.out.println("Bankmanagement App");
         System.out.println("1. Import");
